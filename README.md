@@ -42,6 +42,9 @@ A **visually appealing** introduction to the app that sets a **motivating tone**
 - ⚙️ **Edit/Delete Options**: Flexibility to **manage habits** as needed.
 
 ---
+The UI:
+![Asset 1-100](https://github.com/user-attachments/assets/f8ed6da9-5c9d-4c45-bdfb-f9120cd1b119)
 
+---
 ✨ Whether you want to **exercise daily**, **read more**, or focus on **self-improvement**, the Habit Tracker app is the **perfect tool** to help you stay **motivated** and achieve your goals **efficiently**! 💪
 
