@@ -22,6 +22,7 @@ class _SignInPageState extends State<SignInPage> {
 
     
 
+
     if (_mybox0.get("IS_LOGGED")== null) {
       _mybox0.put("IS_LOGGED", false);
     }
@@ -34,7 +35,7 @@ class _SignInPageState extends State<SignInPage> {
   final _formKey = GlobalKey<FormState>();
   final _emailC = TextEditingController();
   final _passC = TextEditingController();
-  var userDataC;
+  User? userDataC;
   bool isEmail = false; 
   bool isPass = false;
   @override
@@ -68,6 +69,7 @@ class _SignInPageState extends State<SignInPage> {
                     if (usersData[i].email == value) {
                       isEmail = true;
                       userDataC = usersData[i];
+                      print(userDataC!.name);
                       break;
                     }
                   }
@@ -124,6 +126,10 @@ class _SignInPageState extends State<SignInPage> {
                 ),
 onPressed: () async {
   if (_formKey.currentState!.validate()) {
+    _mybox0.put("USER_NAME", userDataC!.name);
+    _mybox0.put("USER_AGE", userDataC!.age);
+    _mybox0.put("USER_EMAIl", userDataC!.email);
+    _mybox0.put("USER_GENDER", userDataC!.gender);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text("Signed in successfully!"),

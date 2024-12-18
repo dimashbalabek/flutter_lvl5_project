@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_lvl5_project/data.dart';
 import 'package:flutter_lvl5_project/data/habit_database.dart';
 import 'package:flutter_lvl5_project/util/date_container.dart';
 import 'package:flutter_lvl5_project/util/habit_settings_box.dart';
@@ -16,24 +17,81 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  late User userData;
   
   HabitDatabase db = HabitDatabase();
+  bool? isNewStrikeDay1;
   final _myBox = Hive.box("Habit_Database");
+  final _mybox0 = Hive.box("Box_Sign");
   var index1Foruk;
   int _selectedIndex = 0;
+  
+  
 
   @override
+
+  void TheNewDayShower(){
+    if (isNewStrikeDay1 == true) {  
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: Colors.purple[100],
+        content: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16)
+          ),
+          height: MediaQuery.of(context).size.width*0.5,
+          width: MediaQuery.of(context).size.width*0.8,
+          child: Column(
+            children: [
+              Image.asset("assets/day_strike_continues.png", width: 200,),
+              Text("CONGRATULATIONS ON THE NEW STRIKE DAY!", style: TextStyle(color: Colors.black, fontWeight: FontWeight.w900)),
+            ],
+          ),
+        ),
+        duration: Duration(seconds: 3),
+      ),
+    );
+
+    setState(() {
+      isNewStrikeDay1 = false;
+      _myBox.put("IS_NEW_DAY", false);
+    });
+  } else {
+    isNewStrikeDay1 = false;
+  }
+  }
   void initState() {
+
     if (_myBox.get("CURRENT_HABIT_LIST") == null) {
       db.createDefaultData();
     } else {
       db.loadData();
     }
 
+    isNewStrikeDay1 = _myBox.get("IS_NEW_DAY");
+    print(isNewStrikeDay1);
+    
+    userData = User(
+      name: _mybox0.get("USER_NAME"), 
+      gender: _mybox0.get("USER_GENDER"), 
+      age: _mybox0.get("USER_AGE"), 
+      email: _mybox0.get("USER_NAME"), 
+      password: _mybox0.get("USER_NAME")
+      );
+      print(userData.name);
+
     index1Foruk = db.habitListOfAllTime.length - 1;
     db.updateDatabase();
     super.initState();
+  WidgetsBinding.instance.addPostFrameCallback((_) {
+    TheNewDayShower();
+  });
   }
+
+  
+
 
   void _onItemTapped(int index) {
     setState(() {
@@ -42,6 +100,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void checkboxTapped(bool? newValue, int index) {
+
     setState(() {
       db.todaysHabitList[index][1] = newValue;
       db.habitListOfAllTime[db.habitListOfAllTime.length - 1][index][1] = newValue;
@@ -193,7 +252,7 @@ class _HomePageState extends State<HomePage> {
                                     color: Color.fromARGB(255, 242, 223, 255),
                                     borderRadius: BorderRadius.circular(30)
                                   ),
-                                  child: Text("Female", style: TextStyle(color: Colors.purple),),
+                                  child: Text(userData.gender, style: TextStyle(color: Colors.purple),),
                                 ),
                                 SizedBox(width: 10,),
                                 Container(
@@ -213,7 +272,7 @@ class _HomePageState extends State<HomePage> {
                               ],
                             ),
 
-                            Text("Ashley Robinson", style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900),)
+                            Text(userData.name, style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900),)
                           ],
                         ),
                       )

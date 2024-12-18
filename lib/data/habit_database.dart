@@ -6,6 +6,7 @@ final _myBox = Hive.box('Habit_Database');
 
 class HabitDatabase {
   var lastd = DateTime.now();
+  bool isNewStrikeDay = false;
   int day_strike = 0;
   List todaysHabitList = [];
   List habitListOfAllTime = [];
@@ -30,6 +31,7 @@ class HabitDatabase {
 
     _myBox.put("START_DATE", todaysDateFormatted());
     _myBox.put("DAY_STRIKE", 0);
+    _myBox.put("IS_NEW_DAY", false);
     _myBox.put("DATES", [todaysDateFormatted()]);
     _myBox.put("DATES_DATA", habitListOfAllTime);
 
@@ -65,7 +67,10 @@ class HabitDatabase {
       }
 
               if (count == todaysHabitList.length) {
+          _myBox.put("IS_NEW_DAY", true);
+          print("true is printed from database");
           day_strike+=1;
+          
         }else if(count != todaysHabitList.length){
         }
 
