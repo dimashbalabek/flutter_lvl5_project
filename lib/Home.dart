@@ -63,6 +63,17 @@ class _HomePageState extends State<HomePage> {
   }
   }
   void initState() {
+    print("сооющение от хоум пейдж");
+    print( _mybox0.get("USER_NAME"), );
+    print( _mybox0.get("USER_GENDER"));
+    print( _mybox0.get("USER_AGE"), );
+    print( _mybox0.get("USER_EMAIL"),);
+    print( _mybox0.get("USER_NAME"));
+    
+    
+    
+
+
 
     if (_myBox.get("CURRENT_HABIT_LIST") == null) {
       db.createDefaultData();
@@ -74,10 +85,10 @@ class _HomePageState extends State<HomePage> {
     print(isNewStrikeDay1);
     
     userData = User(
-      name: _mybox0.get("USER_NAME"), 
-      gender: _mybox0.get("USER_GENDER"), 
-      age: _mybox0.get("USER_AGE"), 
-      email: _mybox0.get("USER_EMAIL"), 
+      name:     _mybox0.get("USER_NAME"), 
+      gender:   _mybox0.get("USER_GENDER"), 
+      age:      _mybox0.get("USER_AGE"), 
+      email:    _mybox0.get("USER_EMAIL"), 
       password: _mybox0.get("USER_NAME")
       );
       print(userData.name);
@@ -143,6 +154,7 @@ class _HomePageState extends State<HomePage> {
       db.todaysHabitList[index][0] = _newHabitNameController.text;
       db.todaysHabitList[index][1] = false;
       db.habitListOfAllTime[db.habitListOfAllTime.length - 1][index][1] = false;
+      db.updateDatabase();
     });
 
     _newHabitNameController.clear();
@@ -315,19 +327,21 @@ class _HomePageState extends State<HomePage> {
                 height: 180,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: 12,
+                  itemCount: db.day_strike_achievment_list.length-1,
                   itemBuilder: (context, index) {
                     return         Container(
                       margin: EdgeInsets.all(12),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Colors.purple[300]
+                color:  db.day_strike >= db.day_strike_achievment_list[index]
+        ? Colors.purple[300]
+        : Colors.grey[400]
               ),
               width: MediaQuery.of(context).size.width*0.6,
               child: Column(
                 children: [
                   Image.asset("assets/fir_p.png", width: 50,),
-                  Text("${(index+1)*25}", style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800),),
+                  Text("${db.day_strike_achievment_list[index]}", style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800),),
                   Text("Days in a row!", style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900),)
                 ],
               ),

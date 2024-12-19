@@ -10,6 +10,7 @@ class HabitDatabase {
   int day_strike = 0;
   List todaysHabitList = [];
   List habitListOfAllTime = [];
+  List day_strike_achievment_list = [1, 3, 5, 7, 10, 15, 20, 25, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400];
   List dates = [];
   Map<DateTime, int> heatMapDataSet = {};
 
@@ -31,6 +32,7 @@ class HabitDatabase {
 
     _myBox.put("START_DATE", todaysDateFormatted());
     _myBox.put("DAY_STRIKE", 0);
+    _myBox.put("DAY_STRIKE_MAX", 0);
     _myBox.put("IS_NEW_DAY", false);
     _myBox.put("DATES", [todaysDateFormatted()]);
     _myBox.put("DATES_DATA", habitListOfAllTime);
@@ -70,11 +72,13 @@ class HabitDatabase {
           _myBox.put("IS_NEW_DAY", true);
           print("true is printed from database");
           day_strike+=1;
+          _myBox.put("DAY_STRIKE_MAX", day_strike);
           
         }else if(count != todaysHabitList.length){
         }
 
         _myBox.put("DAY_STRIKE", day_strike);
+        
 
 
       // set all habit completed to false since it's a new day

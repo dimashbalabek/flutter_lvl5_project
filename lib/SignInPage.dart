@@ -57,6 +57,7 @@ class _SignInPageState extends State<SignInPage> {
                   children: [
                     Text("Welcome!", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 24),),
                     Text("Hi! enter your details to get sign in to your account"),
+                    SizedBox(height: 14,)
                   ],
                 ),
               ),
@@ -80,6 +81,10 @@ class _SignInPageState extends State<SignInPage> {
                   else if(isEmail == false){
                     return "invalid email";
                   }
+
+                  if (!RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$').hasMatch(value)) {
+                    return "Invalid email format";
+                    }
                   
                 },
                 decoration: InputDecoration(
@@ -126,10 +131,15 @@ class _SignInPageState extends State<SignInPage> {
                 ),
 onPressed: () async {
   if (_formKey.currentState!.validate()) {
+    print(userDataC!.name);
+    print(userDataC!.age);
+    print(userDataC!.email);
+    print(userDataC!.gender);
     _mybox0.put("USER_NAME", userDataC!.name);
     _mybox0.put("USER_AGE", userDataC!.age);
-    _mybox0.put("USER_EMAIl", userDataC!.email);
+    _mybox0.put("USER_EMAIL", userDataC!.email);
     _mybox0.put("USER_GENDER", userDataC!.gender);
+    print("по идеи кетти");
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text("Signed in successfully!"),

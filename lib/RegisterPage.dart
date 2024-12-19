@@ -135,9 +135,15 @@ SizedBox(
                 keyboardType: TextInputType.emailAddress,
                 controller: _email,
                 validator: (value) {
+                  
                   if (value == null || value.isEmpty) {
                     return "please enter your email";
                   }
+
+                  
+                  if (!RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$').hasMatch(value)) {
+                    return "Invalid email format";
+                    }
                   return null;
                 },
                 decoration: InputDecoration(
