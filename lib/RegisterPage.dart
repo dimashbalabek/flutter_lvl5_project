@@ -208,6 +208,11 @@ ElevatedButton(
   ),
   onPressed: () {
     if (_formKey.currentState!.validate()) {
+    _mybox0.put("USER_NAME", _name.text);
+    _mybox0.put("USER_AGE", _age.text);
+    _mybox0.put("USER_EMAIL", _email.text);
+    _mybox0.put("USER_GENDER", gender);
+
       _mybox0.put("IS_LOGGED", true);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

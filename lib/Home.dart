@@ -77,7 +77,7 @@ class _HomePageState extends State<HomePage> {
       name: _mybox0.get("USER_NAME"), 
       gender: _mybox0.get("USER_GENDER"), 
       age: _mybox0.get("USER_AGE"), 
-      email: _mybox0.get("USER_NAME"), 
+      email: _mybox0.get("USER_EMAIL"), 
       password: _mybox0.get("USER_NAME")
       );
       print(userData.name);
@@ -272,7 +272,8 @@ class _HomePageState extends State<HomePage> {
                               ],
                             ),
 
-                            Text(userData.name, style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900),)
+                            Text(userData.name, style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900),),
+                            Text(userData.email, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Colors.grey),),
                           ],
                         ),
                       )
