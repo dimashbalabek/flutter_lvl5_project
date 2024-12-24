@@ -104,9 +104,9 @@ class _RegisterPageState extends State<RegisterPage> {
 
 
 SizedBox(
-  width: MediaQuery.of(context).size.width *0.6, // Full width of the screen
+  width: MediaQuery.of(context).size.width *0.6,
   child: DropdownButton<String>(
-    isExpanded: true,  // Expands to take the entire width
+    isExpanded: true, 
     icon: isMale ? Icon(Icons.male) : Icon(Icons.female),
     value: gender,
     items: [

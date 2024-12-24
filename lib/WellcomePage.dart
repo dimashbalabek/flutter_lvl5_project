@@ -47,7 +47,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   title: "Habits Tracker App",
                   bodyWidget: Center(
                     child: Container(
-                      height: MediaQuery.of(context).size.height * 0.6,
+                      height: MediaQuery.of(context).size.height * 0.65,
                       width: MediaQuery.of(context).size.width * 0.7,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
